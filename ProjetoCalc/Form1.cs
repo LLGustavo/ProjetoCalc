@@ -9,11 +9,9 @@ namespace ProjetoCalc
         {
             InitializeComponent();
         }
-
-        // Propriedades para armazenar o valor atual e o resultado
         public decimal Resultado { get; set; }
         public decimal Valor { get; set; }
-        private Operacao OperacaoSelecionada { get; set; } = Operacao.Nenhuma; // Inicia sem nenhuma operação selecionada
+        private Operacao OperacaoSelecionada { get; set; } = Operacao.Nenhuma; 
 
         private enum Operacao
         {
@@ -23,33 +21,32 @@ namespace ProjetoCalc
             Multiplicacao,
             Divisao
         }
-
-        // Evento genérico para botões numéricos
+       
         private void btnNumero_Click(object sender, EventArgs e)
         {
             Button botao = sender as Button;
             if (botao != null)
             {
-                // Evita que o primeiro número seja 0 repetidamente
+              
                 if (txtResultado.Text == "0")
                 {
                     txtResultado.Text = botao.Text;
                 }
                 else
                 {
-                    txtResultado.Text += botao.Text; // Adiciona o número ao texto atual
+                    txtResultado.Text += botao.Text; 
                 }
             }
         }
 
-        // Eventos individuais para operações
+        // Eventos individuais para operaÃ§Ãµes
         private void btnSomar_Click(object sender, EventArgs e)
         {
             if (decimal.TryParse(txtResultado.Text, out decimal numero))
             {
                 Valor = numero;
                 OperacaoSelecionada = Operacao.Adicao;
-                txtResultado.Text = ""; // Limpa o display para a próxima entrada
+                txtResultado.Text = ""; 
             }
         }
 
@@ -59,7 +56,7 @@ namespace ProjetoCalc
             {
                 Valor = numero;
                 OperacaoSelecionada = Operacao.Subtracao;
-                txtResultado.Text = ""; // Limpa o display para a próxima entrada
+                txtResultado.Text = ""; 
             }
         }
 
@@ -69,7 +66,7 @@ namespace ProjetoCalc
             {
                 Valor = numero;
                 OperacaoSelecionada = Operacao.Multiplicacao;
-                txtResultado.Text = ""; // Limpa o display para a próxima entrada
+                txtResultado.Text = ""; 
             }
         }
 
@@ -79,11 +76,11 @@ namespace ProjetoCalc
             {
                 Valor = numero;
                 OperacaoSelecionada = Operacao.Divisao;
-                txtResultado.Text = ""; // Limpa o display para a próxima entrada
+                txtResultado.Text = ""; 
             }
         }
 
-        // Eventos individuais para botões numéricos de 0 a 9
+        
         private void btnZero_Click(object sender, EventArgs e)
         {
             txtResultado.Text += "0";
@@ -134,7 +131,7 @@ namespace ProjetoCalc
             txtResultado.Text += "9";
         }
 
-        // Botão igual para calcular o resultado
+       
         private void btnIgual_Click(object sender, EventArgs e)
         {
             if (decimal.TryParse(txtResultado.Text, out decimal numero))
@@ -151,45 +148,43 @@ namespace ProjetoCalc
                         Resultado = Valor * numero;
                         break;
                     case Operacao.Divisao:
-                        if (numero != 0) // Previne divisão por zero
+                        if (numero != 0) 
                         {
                             Resultado = Valor / numero;
                         }
                         else
                         {
-                            MessageBox.Show("Erro: Divisão por zero!");
-                            txtResultado.Text = "0"; // Reseta o display
+                            MessageBox.Show("Erro: DivisÃ£o por zero!");
+                            txtResultado.Text = "0"; 
                             return;
                         }
                         break;
                     default:
-                        MessageBox.Show("Nenhuma operação foi selecionada.");
+                        MessageBox.Show("Nenhuma operaÃ§Ã£o foi selecionada.");
                         return;
                 }
 
-                // Mostra o resultado no display e reseta a operação
                 txtResultado.Text = Resultado.ToString();
                 OperacaoSelecionada = Operacao.Nenhuma;
             }
             else
             {
-                MessageBox.Show("Entrada inválida!");
+                MessageBox.Show("Entrada invÃ¡lida!");
             }
         }
 
-        // Botão para limpar o display e resetar valores
         private void btnLimpar_Click(object sender, EventArgs e)
         {
-            txtResultado.Text = ""; // Reseta o display
-            Valor = 0; // Reseta o valor armazenado
-            Resultado = 0; // Reseta o resultado
-            OperacaoSelecionada = Operacao.Nenhuma; // Reseta a operação
+            txtResultado.Text = ""; 
+            Valor = 0; 
+            Resultado = 0; 
+            OperacaoSelecionada = Operacao.Nenhuma; 
         }
 
-        // Botão para adicionar uma vírgula decimal
+       
         private void btnVirgula_Click(object sender, EventArgs e)
         {
-            if (!txtResultado.Text.Contains(",")) // Adiciona vírgula apenas se não existir
+            if (!txtResultado.Text.Contains(",")) 
             {
                 txtResultado.Text += ",";
             }
